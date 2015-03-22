@@ -2,11 +2,15 @@
 
 using LiveSplit.ASL;
 using LiveSplit.Model;
+using LiveSplit.Options;
+using LiveSplit.TimeFormatters;
+using LiveSplit.UI;
+using LiveSplit.UI.Components;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace LiveSplit.UI.Components
+namespace LiveSplit.OcarinaOfTime
 {
     class Component : IComponent
     {
@@ -18,9 +22,9 @@ namespace LiveSplit.UI.Components
         }
 
         public float PaddingBottom { get { return 0; } }
-        public float PaddingTop { get { return 0; } }
         public float PaddingLeft { get { return 0; } }
         public float PaddingRight { get { return 0; } }
+        public float PaddingTop { get { return 0; } }
 
         public bool Refresh { get; set; }
 
