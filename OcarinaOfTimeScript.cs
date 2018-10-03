@@ -39,6 +39,7 @@ namespace LiveSplit.ASL
             switch (gameVersion)
             {
                 case GameVersion.NTSC10: RebuildNTSC10(); break;
+                case GameVersion.NTSC11: RebuildNTSC11(); break;
                 case GameVersion.NTSC12: RebuildNTSC12(); break;
                 default: Emulator = null; break;
             }
@@ -60,6 +61,23 @@ namespace LiveSplit.ASL
             AddPointer<float>("Y", 0x1c8718);
             AddPointer<float>("Z", 0x1c871c);
             AddPointer<byte>("WarpAnimationPlaying", 0x1c87cc);
+        }
+        private void RebuildNTSC11()
+        {
+            AddPointer<GameData>("Data", 0x11a790);
+            AddPointer<byte>("FPSDenominator", 0x1c7162);
+            AddPointer<int>("GameFrames", 0x11f728);
+            AddPointer<Scene>("Scene", 0x1c8706);
+            AddPointer<sbyte>("GohmasHealth", 0x1e85cc);
+            AddPointer<sbyte>("GanonsHealth", 0x1fa49c);
+            AddPointer<sbyte>("GanondorfsHealth", 0x20b78c);
+            AddPointer<Animation>("GanonsAnimation", 0x1fa534);
+            AddPointer<Dialog>("Dialog", 0x1d8a32);
+            AddPointer<ScreenType>("IsOnTitleScreenOrFileSelect", 0x11baec);
+            AddPointer<float>("X", 0x1c88d4);
+            AddPointer<float>("Y", 0x1c88d8);
+            AddPointer<float>("Z", 0x1c88dc);
+            AddPointer<byte>("WarpAnimationPlaying", 0x1c898c);
         }
         private void RebuildNTSC12()
         {
@@ -88,6 +106,12 @@ namespace LiveSplit.ASL
 
             if (gameDataCheck == correctChecksum)
                 return GameVersion.NTSC10;
+
+            //Check for NTSC 1.1
+            gameDataCheck = ~Emulator.CreatePointer<String>(4, 0x11a7ac);
+
+            if (gameDataCheck == correctChecksum)
+                return GameVersion.NTSC11;
 
             //Check for NTSC 1.2
             gameDataCheck = ~Emulator.CreatePointer<String>(4, 0x11ac9c);
