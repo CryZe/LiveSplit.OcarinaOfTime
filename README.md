@@ -12,6 +12,7 @@ The Component is currently compatible with the following emulators:
 
 The Component is currently compatible with the following versions of the game:
 - NTSC 1.0
+- NTSC 1.1
 - NTSC 1.2
 
 The following splits are currently automatically being splitted:
